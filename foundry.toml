@@ -4,3 +4,6 @@ out = "out"
 libs = ["lib"]
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
+
+eth_rpc_url = 'https://eth-goerli.g.alchemy.com/v2/VlUreTLZrMU3k7Lpymg9zpV_tGNuGoSU'
+etherscan_api_key = 'VlUreTLZrMU3k7Lpymg9zpV_tGNuGoSU'

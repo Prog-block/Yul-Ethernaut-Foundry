@@ -1,0 +1,48 @@
+git clone https://github.com/Prog-block/Yul-Ethernaut-Foundry.git, cloning repo into vs code
+curl -L https://foundry.paradigm.xyz | bash, to install foundry in the repo
+foundryup
+forge init or forge init --force
+forge build
+
+cd lib -> git clone https://github.com/OpenZeppelin/openzeppelin-contracts.git
+or 
+git submodule add https://github.com/OpenZeppelin/openzeppelin-contracts.git lib/openzeppelin-contracts
+or 
+do it directly in .gitmodules, these has to be done when we are using a repo within a repo in github
+
+forge remappings > remappings.txt
+
+git add .
+git commit -m "added new feature to contract"
+git push
+
+anvil, gives list of accounts and private keys
+
+script is used for local network
+
+forge script script/Counter.s.sol:CounterScript --fork-url http:localhost:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80, this will simulate the deployment not actually deploy it, for actually deploying:
+
+forge script script/Counter.s.sol:CounterScript --fork-url http:localhost:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --broadcast
+
+cast call address_of_contract "getCount() (int)", can now be used to interact with function of the contract
+
+export PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80, setting private key to a variable
+
+export CONTRACT_ADDRESS=0x5fbdb2315678afecb367f032d93f642f64180aa3, setting deployed contract address to a variable
+
+cast send $CONTRACT_ADDRESS "incrementCounter()" --private-key $PRIVATE_KEY
+
+
+---------------
+
+for deploying on goerli:
+
+Take api key and rpc url(HTTPS) from alchemy , and set them in foundry.toml:
+eth_rpc_url = 'https://eth-goerli.g.alchemy.com/v2/VlUreTLZrMU3k7Lpymg9zpV_tGNuGoSU'
+etherscan_api_key = 'VlUreTLZrMU3k7Lpymg9zpV_tGNuGoSU'
+
+set up your private key in hide.env:
+PRIVATE_KEY= xxx
+
+forge script script/Counter.s.sol:CounterScript --rpc-url https://eth-goerli.g.alchemy.com/v2/VlUreTLZrMU3k7Lpymg9zpV_tGNuGoSU --private-key PRIVATE_KEY --broadcast, evm file is not working for this
+forge script script/Counter.s.sol:CounterScript --rpc-url https://eth-goerli.g.alchemy.com/v2/VlUreTLZrMU3k7Lpymg9zpV_tGNuGoSU --private-key d7b483b9df174e2c34ddd9b7adbda98656efae6f2667a57d3d4fac539b95c8bc --broadcast, have to do this
