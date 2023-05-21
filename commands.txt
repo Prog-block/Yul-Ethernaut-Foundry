@@ -3,6 +3,7 @@ curl -L https://foundry.paradigm.xyz | bash, to install foundry in the repo
 foundryup
 forge init or forge init --force
 forge build
+cd lib -> git clone https://github.com/foundry-rs/forge-std.git
 
 cd lib -> git clone https://github.com/OpenZeppelin/openzeppelin-contracts.git
 or 

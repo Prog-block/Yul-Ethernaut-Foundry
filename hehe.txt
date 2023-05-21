@@ -1,0 +1,44 @@
+777
+
+call(
+    maximum gas,
+    address of target contract,
+    amount of wei to pass with the function to the target contract,
+    starting location of data,
+    length of data to copy,
+    position where we want to store the data,
+    amount of data to be copied
+)
+
+        let success := call(
+            gas(),
+            sload(pool.slot), // address of pool contract
+            0, // passing 0 wei
+            add(flashloanCalldata, 0x20), // passing data
+            0xa4, // length of calldata
+            0,
+            0
+        )
+
+666
+
+1. gas: amount of gas to send to the sub context to execute. The gas that is not used by the sub context is returned to this one.
+2. address: the account which code to execute, or target contract
+3. argsOffset: byte offset in the memory in bytes, the calldata of the sub context.
+4. argsSize: byte size to copy (size of the calldata).
+5. retOffset: byte offset in the memory in bytes, where to store the return data of the sub context.
+6. retSize: byte size to copy (size of the return data).
+
+staticcall(
+    gas(), // use any amount of gas
+    0x4, // address of target contract. Identity in this case
+    approveCalldata, // the data is starting at approveCallData
+    100, // length of data to copy
+    add(fmp, 0xa4), // we want to store it here, just afterstored 0x80 previously
+    100 // 100 bytes of data will be copied
+)
+
+
+
+forge test --match-path test/HelloWorld.t.sol -vv
+forge build --help
