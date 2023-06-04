@@ -18,6 +18,7 @@ git commit -m "added new feature to contract"
 git push
 
 anvil, gives list of accounts and private keys
+anvil --port 8555// for running on another port 
 
 script is used for local network
 
