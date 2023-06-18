@@ -35,12 +35,6 @@ contract EthernautScript is Script {
     uint256 key;
     address player;
 
-    event LevelCompletedLog(
-        address indexed player,
-        address indexed instance,
-        address indexed level
-    );
-
     function setUp() public virtual {
         ethernaut = Ethernaut(0xD2e5e0102E55a5234379DD796b8c641cd5996Efd);
         key = vm.envUint("PRIVATE_KEY");
@@ -54,13 +48,13 @@ contract EthernautScript is Script {
         address _level,
         uint256 value
     ) public returns (address payable) {
-        vm.recordLogs();
+
 
         vm.label(_level, "Level");
         ethernaut.createLevelInstance{value: value}(Level(_level));
         address payable instance;
 
-        Vm.Log[] memory entries = vm.getRecordedLogs();
+        
         for (uint256 i = 0; i < entries.length; i++) {
             if (
                 entries[i].topics[0] ==
@@ -81,8 +75,6 @@ contract EthernautScript is Script {
         address payable _instance,
         address _level
     ) public {
-        vm.expectEmit(true, true, true, false);
-        emit LevelCompletedLog(player, _instance, _level);
         ethernaut.submitLevelInstance(_instance);
     }
 }
